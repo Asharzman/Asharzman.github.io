@@ -1,4 +1,4 @@
-import apiService from './sfia_api.js';
+import sfia_api from './sfia_api.js';
 
 /**
  * Initializes hover functionality to display skill details.
@@ -21,7 +21,7 @@ export function initializeHover(skillSelector, descriptionSelector) {
       const itemCode = itemId.split('-')[1];
 
       if (itemId.startsWith('skill-')) {
-        apiService.getSkillByCode(itemCode)
+        sfia_api.getSkillByCode(itemCode)
           .then(skill => {
             descriptionDiv.textContent = `Skill: ${skill.name} - ${skill.description}`;
           })
@@ -29,7 +29,7 @@ export function initializeHover(skillSelector, descriptionSelector) {
             descriptionDiv.textContent = `Error: ${error.message}`;
           });
       } else if (itemId.startsWith('responsibility-')) {
-        apiService.getResponsibilityByCode(itemCode)
+        sfia_api.getResponsibilityByCode(itemCode)
           .then(responsibility => {
             descriptionDiv.textContent = `Responsibility: ${responsibility.name} - ${responsibility.description}`;
           })

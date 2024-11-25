@@ -1,6 +1,5 @@
-import axios from '../dependencies/axios.min.js';
+// import axios from 'axios'; Tämä on importattu jo index.html
 
-// Create Axios instance
 const apiClient = axios.create({
   baseURL: 'https://www.monolithdirective.com/',
   headers: {
