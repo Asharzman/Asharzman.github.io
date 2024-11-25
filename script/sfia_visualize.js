@@ -6,8 +6,8 @@ import sfia_api from './sfia_api.js';
  * @param {string} skillSelector - CSS selector for the hoverable skill elements (e.g., '.hoverable-skill').
  * @param {string} descriptionSelector - CSS selector for the element to display the description.
  */
-export function initializeHover(skillSelector, descriptionSelector) {
-  const hoverableSkills = document.querySelectorAll(skillSelector);
+export function initializeHover(itemSelector, descriptionSelector) {
+  const hoverableItems = document.querySelectorAll(itemSelector);
   const descriptionDiv = document.querySelector(descriptionSelector);
 
   if (!hoverableItems.length || !descriptionDiv) {
