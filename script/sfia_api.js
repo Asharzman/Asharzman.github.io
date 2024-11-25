@@ -1,11 +1,14 @@
 // import axios from 'axios'; Tämä on importattu jo index.html
+const apiUrl = 'https://www.monolithdirective.com/';
+const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
-const apiClient = axios.create({
-  baseURL: 'https://www.monolithdirective.com/',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+axios.get(corsProxy + apiUrl)
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
 
 apiClient.interceptors.response.use(
   response => response,
