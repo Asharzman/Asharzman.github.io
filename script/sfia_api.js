@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../dependencies/axios.min.js';
 
 // Create Axios instance
 const apiClient = axios.create({

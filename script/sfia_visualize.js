@@ -10,26 +10,39 @@ export function initializeHover(skillSelector, descriptionSelector) {
   const hoverableSkills = document.querySelectorAll(skillSelector);
   const descriptionDiv = document.querySelector(descriptionSelector);
 
-  if (!hoverableSkills.length || !descriptionDiv) {
+  if (!hoverableItems.length || !descriptionDiv) {
     console.warn('HoverSkillDetails: No elements found for the provided selectors.');
     return;
   }
 
-  hoverableSkills.forEach(skillElement => {
-    skillElement.addEventListener('mouseover', () => {
-      const skillCode = skillElement.id.replace('skill-', '');
+  hoverableItems.forEach(itemElement => {
+    itemElement.addEventListener('mouseover', () => {
+      const itemId = itemElement.id;
+      const itemCode = itemId.split('-')[1];
 
-      apiService.getSkillByCode(skillCode)
-        .then(skill => {
-          descriptionDiv.textContent = `Description: ${skill.description}`;
-        })
-        .catch(error => {
-          descriptionDiv.textContent = `Error: ${error.message}`;
-        });
+      if (itemId.startsWith('skill-')) {
+        apiService.getSkillByCode(itemCode)
+          .then(skill => {
+            descriptionDiv.textContent = `Skill: ${skill.name} - ${skill.description}`;
+          })
+          .catch(error => {
+            descriptionDiv.textContent = `Error: ${error.message}`;
+          });
+      } else if (itemId.startsWith('responsibility-')) {
+        apiService.getResponsibilityByCode(itemCode)
+          .then(responsibility => {
+            descriptionDiv.textContent = `Responsibility: ${responsibility.name} - ${responsibility.description}`;
+          })
+          .catch(error => {
+            descriptionDiv.textContent = `Error: ${error.message}`;
+          });
+      } else {
+        descriptionDiv.textContent = 'Unknown item type.';
+      }
     });
 
-    skillElement.addEventListener('mouseout', () => {
-      descriptionDiv.textContent = 'Hover over to see its details here.';
+    itemElement.addEventListener('mouseout', () => {
+      descriptionDiv.textContent = 'Hover over an item to see its details here.';
     });
   });
 }
